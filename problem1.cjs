@@ -53,7 +53,7 @@ function createDirectoryAndDeleteTheDirectoryFiles() {
 
         return new Promise((resolve, rejects) => {
 
-            return fileRefrenceArray.map((elment, index, array) => {
+            let creationMessage = fileRefrenceArray.map((elment, index, array) => {
 
                 fs.writeFile(
 
@@ -76,6 +76,8 @@ function createDirectoryAndDeleteTheDirectoryFiles() {
 
                     });
 
+                return 'All files created';
+
             });
 
         });
@@ -96,17 +98,17 @@ function createDirectoryAndDeleteTheDirectoryFiles() {
 
             fs.unlink(fileName, (error) => {
 
-                    if (error) {
+                if (error) {
 
-                        rejects(error);
+                    rejects(error);
 
-                    } else {
+                } else {
 
-                        resolve('files deleted');
+                    resolve('files deleted');
 
-                    }
+                }
 
-                });
+            });
 
         });
 
@@ -114,16 +116,14 @@ function createDirectoryAndDeleteTheDirectoryFiles() {
 
     let message = fileRefrenceArray.map((nums, index) => {
 
-        let fileDeteted = fileDeletion(`${path.join(__dirname, `${directoryName}`,
-        `file${index + 1}.json`)}`);
+        fileDeletion(`${path.join(__dirname, `${directoryName}`,
+            `file${index + 1}.json`)}`);
 
-        fileDeteted.then((data) => {
-
-            console.log(data.toString());
-
-        });
+        return 'Files deleted';
 
     });
+
+    console.log(message);
 
 }
 
